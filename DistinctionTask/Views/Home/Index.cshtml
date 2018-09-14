@@ -1,0 +1,26 @@
+﻿<!-- ~/Views/Home/Index.cshtml -->
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<img src="~/Image/MU_LOGO.png" width="220" />
+<div class="jumbotron">
+    <h1>M.J.A. Application</h1>
+    <p class="lead">M.J.A. Application is short for Monash journalists and articles application. This website collect information of all journalists and their articles.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>Journalists</h2>
+        <p>
+            All monash students are free to become a journalist. They can upload their articles to this website.
+        </p>
+        <h4 class="btn btn-default">@Html.ActionLink("View Journalists", "Index", "Journalists")</h4>
+    </div>
+    <div class="col-md-6">
+        <h2>Articles</h2>
+        <p>All articles are uploaded by monash journalists.</p>
+        <h4 class="btn btn-default">@Html.ActionLink("View Articles", "Index", "Articles")</h4>
+    </div>
+</div>

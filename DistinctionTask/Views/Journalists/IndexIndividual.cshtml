@@ -1,0 +1,83 @@
+﻿@using Microsoft.AspNet.Identity;
+@model IEnumerable<DistinctionTask.Models.AspNetUser>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<table class="table" id="data">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfBirth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class=".filter">
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td class=".filter">
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td class=".filter">
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td class=".filter">
+                    @Html.DisplayFor(modelItem => item.DateOfBirth)
+                </td>
+                <td class=".filter">
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                @if (item.Id.Equals(User.Identity.GetUserId()))
+                {
+                    <td>
+                        @Html.ActionLink("Edit", "EditIndividual", new { id = item.Id }) |
+                        @Html.ActionLink("Details", "DetailsIndividual", new { id = item.Id })
+                    </td>
+                }
+                else
+                {
+                    <td>
+
+                        @Html.ActionLink("Details", "Details", new { id = item.Id })
+                    </td>
+                }
+            </tr>
+
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <th>Email</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Date of birth</th>
+            <th>Address</th>
+        </tr>
+    </tfoot>
+
+</table>
+
+@section Scripts{
+    @Scripts.Render("~/Scripts/filter.journalists.js")
+}

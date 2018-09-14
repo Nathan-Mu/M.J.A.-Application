@@ -1,0 +1,63 @@
+﻿@using Microsoft.AspNet.Identity;
+@model IEnumerable<DistinctionTask.Models.Article>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PubDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Text)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PubDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Text)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+            </td>
+            @if (item.JournalistId.Equals(User.Identity.GetUserId()))
+            {
+                <td>
+                    @Html.ActionLink("Edit", "EditIndividual", new { id = item.ArticleId }) |
+                    @Html.ActionLink("Details", "DetailsIndividual", new { id = item.ArticleId }) |
+                    @Html.ActionLink("Delete", "DeleteIndividual", new { id = item.ArticleId })
+                </td>
+            }
+            else
+            {
+                <td>
+                    @Html.ActionLink("Details", "DetailsIndividual", new { id = item.ArticleId })
+                </td>
+            }
+        </tr>
+            }
+
+</table>
+@section Scripts{
+    @Scripts.Render("~/Scripts/filter.articles.js")
+}
